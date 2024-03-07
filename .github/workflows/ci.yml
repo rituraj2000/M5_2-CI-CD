@@ -37,23 +37,23 @@ jobs:
         echo "Docker images built successfully!"
 
 #   deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-    - name: Deploy to hosting platform
-      env:
-        HOST_PASSWORD: ${{ secrets.HOST_PASSWORD }}
-      run: |
-        echo "Deploying to remote host..."
-        scp -r ./app user@remote-host:/path/to/deploy
-        echo "Application code copied to remote host."
-        ssh user@remote-host "
-          echo 'Stopping existing containers on remote host...'
-          cd /path/to/deploy
-          docker-compose down
-          echo 'Starting new containers on remote host...'
-          docker-compose up -d
-          echo 'Deployment completed successfully!'
-        "
+    # needs: build
+    # runs-on: ubuntu-latest
+    # steps:
+    # - name: Checkout code
+    #   uses: actions/checkout@v2
+    # - name: Deploy to hosting platform
+    #   env:
+    #     HOST_PASSWORD: ${{ secrets.HOST_PASSWORD }}
+    #   run: |
+    #     echo "Deploying to remote host..."
+    #     scp -r ./app user@remote-host:/path/to/deploy
+    #     echo "Application code copied to remote host."
+    #     ssh user@remote-host "
+    #       echo 'Stopping existing containers on remote host...'
+    #       cd /path/to/deploy
+    #       docker-compose down
+    #       echo 'Starting new containers on remote host...'
+    #       docker-compose up -d
+    #       echo 'Deployment completed successfully!'
+    #     "
