@@ -12,9 +12,9 @@ jobs:
       postgres:
         image: postgres
         env:
-          POSTGRES_USER: postgres  
-          POSTGRES_PASSWORD: mysecretpassword
-          POSTGRES_DB: mydb 
+          POSTGRES_USER: rituraj_db_user  
+          POSTGRES_PASSWORD: rituraj_db_pass
+          POSTGRES_DB: rituraj_db 
         ports: 
           - 5432:5432 
         options: >-
