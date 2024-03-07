@@ -22,7 +22,7 @@ jobs:
     - name: Run tests
       run: |
         echo "Running tests..."
-        pytest tests/
+        pytest
 
   build:
     needs: test
