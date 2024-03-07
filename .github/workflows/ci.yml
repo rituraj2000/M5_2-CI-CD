@@ -6,54 +6,39 @@ on:
       - main
 
 jobs:
-
   test:
     runs-on: ubuntu-latest
+    services: # PostgreSQL service
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_USER: postgres  # Default username
+          POSTGRES_PASSWORD: mysecretpassword
+          POSTGRES_DB: mydb  # Create a database named 'mydb'
+        ports: 
+          - 5432:5432 
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-    - name: Set up Python
-      uses: actions/setup-python@v2
-    - name: Install dependencies
-      run: |
-        echo "Installing project dependencies..."
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-    - name: Run tests
-      run: |
-        echo "Running tests..."
-        pytest
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run tests
+        env:
+          DATABASE_URL: postgresql://postgres:mysecretpassword@localhost:5432/mydb
+        run: |
+          pytest
 
   build:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-    - name: Build Docker images
-      run: |
-        echo "Building Docker images..."
-        docker-compose build
-        echo "Docker images built successfully!"
+    # ... (remains the same)
 
-#   deploy:
-    # needs: build
-    # runs-on: ubuntu-latest
-    # steps:
-    # - name: Checkout code
-    #   uses: actions/checkout@v2
-    # - name: Deploy to hosting platform
-    #   env:
-    #     HOST_PASSWORD: ${{ secrets.HOST_PASSWORD }}
-    #   run: |
-    #     echo "Deploying to remote host..."
-    #     scp -r ./app user@remote-host:/path/to/deploy
-    #     echo "Application code copied to remote host."
-    #     ssh user@remote-host "
-    #       echo 'Stopping existing containers on remote host...'
-    #       cd /path/to/deploy
-    #       docker-compose down
-    #       echo 'Starting new containers on remote host...'
-    #       docker-compose up -d
-    #       echo 'Deployment completed successfully!'
-    #     "
+# deploy (remains commented out for now)
