@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 # PostgreSQL connection details
 DB_HOST = os.environ.get("DB_HOST", "localhost")
-DB_NAME = os.environ.get("DB_NAME", "wong_rituraj_db")
+DB_NAME = os.environ.get("DB_NAME")
 DB_USER = os.environ.get("DB_USER", "rituraj_db_user")
 DB_PASSWORD = os.environ.get("DB_PASSWORD", "rituraj_db_pass")
 
