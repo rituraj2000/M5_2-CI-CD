@@ -5,15 +5,10 @@ import psycopg2
 app = Flask(__name__)
 
 # PostgreSQL connection details
-# DB_HOST = os.environ.get("DB_HOST", "localhost")
-# DB_NAME = os.environ.get("DB_NAME", "rituraj_db")
-# DB_USER = os.environ.get("DB_USER", "rituraj_db_user")
-# DB_PASSWORD = os.environ.get("DB_PASSWORD", "rituraj_db_pass")
-
-DB_HOST = "localhost"
-DB_NAME = "rituraj_db"
-DB_USER = "rituraj_db_user"
-DB_PASSWORD = "rituraj_db_pass"
+DB_HOST = os.environ.get("DB_HOST", "localhost")
+DB_NAME = os.environ.get("DB_NAME", "wong_rituraj_db")
+DB_USER = os.environ.get("DB_USER", "rituraj_db_user")
+DB_PASSWORD = os.environ.get("DB_PASSWORD", "rituraj_db_pass")
 
 @app.route("/")
 def index():
